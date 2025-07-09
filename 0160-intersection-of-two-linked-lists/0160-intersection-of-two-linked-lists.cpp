@@ -70,6 +70,7 @@ public:
         // }
         // return NULL;
 
+        
         if(headA == NULL && headB == NULL) return NULL;
         ListNode* l1 = headA;
         ListNode* l2 = headB;
@@ -83,6 +84,6 @@ public:
             if(l2 == NULL) l2 = headA;
         }
 
-        return NULL;
+        return l1;
     }
 };
