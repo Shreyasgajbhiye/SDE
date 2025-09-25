@@ -12,19 +12,19 @@
 class Solution {
 public:
     int widthOfBinaryTree(TreeNode* root) {
-        queue<pair<TreeNode* , int>> q;
-        int maxi = 0;
+        queue<pair<TreeNode* , unsigned long long>> q;
+        unsigned long long maxi = 0;
 
         q.push({root, 0});
         while(!q.empty()){
-            int L = q.front().second;
-            int R = q.back().second;
+            unsigned long long L = q.front().second;
+            unsigned long long R = q.back().second;
             maxi = max(maxi, R-L+1);
 
-            int n = q.size();
+            unsigned long long n = q.size();
             while(n--){
                 TreeNode* curr = q.front().first;
-                int idx = q.front().second;
+                unsigned long long idx = q.front().second;
                 q.pop();
 
                 if(curr->left){
