@@ -6,33 +6,44 @@
  *     TreeNode *right;
  *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
  *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
 class Solution {
 public:
     vector<vector<int>> verticalTraversal(TreeNode* root) {
         map<int, map<int, multiset<int>>> nodes;
-        queue<pair<TreeNode*, pair<int, int>>> todo;
+        queue<pair<TreeNode*, pair<int, int>>> q;
 
-        todo.push({root, {0, 0}});
-        while (!todo.empty()) {
-            auto p = todo.front();
-            todo.pop();
+        // q.push({root, {0, 0}});
+        // while(!q.empty()){
+        //     int x = q.front().second.first;
+        //     int y = q.front().second.second;
+        //     TreeNode* node = q.front().first;
 
-            TreeNode* node = p.first;
-            int x = p.second.first;
-            int y = p.second.second;
-            nodes[x][y].insert(node->val);
-            if (node->left) {
-                todo.push({node->left, {x - 1, y + 1}});
-            } 
-            if  (node->right){
-                todo.push({node->right, {x + 1, y + 1}});
+        //     nodes[x][y].insert(node->val);
+
+        //     q.pop();
+
+        //     if(node->left) q.push({node->left, {x-1, y+1}});
+        //     if(node->right) q.push({node->right, {x+1, y+1}});
+        // }
+
+        q.push({root, {0,0}});
+        while(!q.empty()){
+            TreeNode* n = q.front().first;
+            int x = q.front().second.first;
+            int y = q.front().second.second;
+            nodes[x][y].insert(n->val);
+            q.pop();
+
+            if(n->left){
+                q.push({n->left,{x-1, y+1}});
             }
+            if(n->right){
+                q.push({n->right,{x+1, y+1}});
+            }   
         }
-
         vector<vector<int>> ans;
         for (auto p : nodes) {
             vector<int> col;
