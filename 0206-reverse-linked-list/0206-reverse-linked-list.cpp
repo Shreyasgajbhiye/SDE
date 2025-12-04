@@ -11,12 +11,10 @@
 class Solution {
 public:
     ListNode* rev(ListNode* head){
-        
         if(head == NULL || head->next == NULL) return head;
-
         ListNode* newHead = rev(head->next);
         ListNode* fwd = head->next;
-        fwd->next = head;
+        fwd->next   = head;
         head->next = NULL;
         return newHead;
     }
